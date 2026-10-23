@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База 100 Целевых Предприятий Москвы & МО | Глобал Плюс</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0B0E14;
+            --bg-surface: #121721;
+            --bg-card: #18202E;
+            --gold: #C5A059;
+            --gold-light: #E0C07A;
+            --red: #D32F2F;
+            --green: #10B981;
+            --blue: #2563EB;
+            --purple: #8B5CF6;
+            --white: #F8FAFC;
+            --text-dim: #94A3B8;
+            --border: rgba(197, 160, 89, 0.2);
+            --border-card: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            padding: 30px 20px 80px;
+            line-height: 1.5;
+        }
+        .top-nav {
+            max-width: 1440px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-card);
+            color: var(--gold);
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        .nav-meta {
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin-bottom: 24px;
+        }
+
+        /* ПАНЕЛЬ УПРАВЛЕНИЯ */
+        .controls-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .search-box input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-card);
+            padding: 14px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            border-color: var(--gold);
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold);
+            min-width: 90px;
+        }
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-card);
+            color: var(--text-dim);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ТАБЛИЦА ЛИДОВ */
+        .table-responsive {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-card);
+            border-radius: 14px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--border-card);
+            vertical-align: top;
+        }
+        th {
+            background: #18202E;
+            color: var(--gold);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        tr:hover td {
+            background: rgba(197, 160, 89, 0.03);
+        }
+        .lead-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .lead-district {
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+        .lead-focus {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+        .sector-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.08);
+            color: #E2E8F0;
+        }
+        .sector-tag.bg-hotel { background: rgba(197, 160, 89, 0.2); color: #E0C07A; border: 1px solid var(--gold); }
+        .sector-tag.bg-med { background: rgba(16, 185, 129, 0.2); color: #6EE7B7; border: 1px solid #10B981; }
+        .sector-tag.bg-dev { background: rgba(59, 130, 246, 0.2); color: #93C5FD; border: 1px solid #3B82F6; }
+        .sector-tag.bg-horeca { background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid #EF4444; }
+        .sector-tag.bg-food { background: rgba(234, 179, 8, 0.2); color: #FDE047; border: 1px solid #EAB308; }
+        .sector-tag.bg-prod { background: rgba(139, 92, 246, 0.2); color: #C4B5FD; border: 1px solid #8B5CF6; }
+        .sector-tag.bg-log { background: rgba(20, 184, 166, 0.2); color: #5EEAD4; border: 1px solid #14B8A6; }
+        .sector-tag.bg-auto { background: rgba(249, 115, 22, 0.2); color: #FDBA74; border: 1px solid #F97316; }
+        .sector-tag.bg-retail { background: rgba(236, 72, 153, 0.2); color: #F472B6; border: 1px solid #EC4899; }
+        .sector-tag.bg-fin { background: rgba(99, 102, 241, 0.2); color: #A5B4FC; border: 1px solid #6366F1; }
+
+        .price-badge {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .retainer-badge {
+            font-size: 0.8rem;
+            color: var(--green);
+            margin-top: 2px;
+        }
+        .actions-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 160px;
+        }
+        .btn-tool {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-deck {
+            background: rgba(197, 160, 89, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
+        }
+        .btn-deck:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        .btn-pager {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--green);
+            color: #6EE7B7;
+        }
+        .btn-pager:hover {
+            background: var(--green);
+            color: #000;
+        }
+        .btn-modal {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-card);
+            color: #CBD5E1;
+            cursor: pointer;
+        }
+        .btn-modal:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО ДОСЬЕ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--gold);
+            border-radius: 16px;
+            max-width: 760px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-close:hover {
+            background: var(--red);
+        }
+        .dossier-sec {
+            margin-bottom: 20px;
+        }
+        .dossier-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .dossier-text {
+            color: #E2E8F0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-card);
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="nav-left">
+        <a href="index.html" class="btn-back">&larr; В Центр Продаж</a>
+        <a href="Competitors_Analysis.html" class="btn-back" style="border-color:#EF4444; color:#F87171;">⚔️ Конкуренты</a>
+        <a href="Comprehensive_Pitches.html" class="btn-back" style="border-color:#10B981; color:#34D399;">💰 Тарифы & КП</a>
+    </div>
+    <div class="nav-meta">
+        <span>⚡ 100 предприятий Москвы</span>
+        <span>•</span>
+        <span>10 стратегических отраслей</span>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Единый Реестр 100 Целевых Предприятий Москвы</h1>
+    <p class="subtitle">Полная база флагманов гостиничного сектора, девелопмента, медицины, ритейла, ресторанных групп, производства и логистики столичного региона с выявленными болями, офферами и прямыми ссылками на презентационные инструменты.</p>
+
+    <!-- ПАНЕЛЬ ПОИСКА И ФИЛЬТРОВ -->
+    <div class="controls-panel">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Поиск по названию компании, району (ЦАО, Сити, Зеленоград), боли, контактам или ЛПР...">
+        </div>
+
+        <div class="filter-group">
+            <span class="filter-label">Отрасль:</span>
+            <button class="filter-btn active" onclick="filterSector('ALL', this)">Все (100)</button>
+            <button class="filter-btn" onclick="filterSector('Отели', this)">Отели 5*</button>
+            <button class="filter-btn" onclick="filterSector('Медицина', this)">Клиники & Медицина</button>
+            <button class="filter-btn" onclick="filterSector('Девелопмент', this)">Девелопмент</button>
+            <button class="filter-btn" onclick="filterSector('Ресторанные', this)">Рестораны & HoReCa</button>
+            <button class="filter-btn" onclick="filterSector('Оптовые', this)">Опт & FMCG</button>
+            <button class="filter-btn" onclick="filterSector('Производство', this)">Производство & Заводы</button>
+            <button class="filter-btn" onclick="filterSector('Логистика', this)">Логистика & Склады</button>
+            <button class="filter-btn" onclick="filterSector('Автоуход', this)">Авто & Тюнинг</button>
+            <button class="filter-btn" onclick="filterSector('Мода', this)">Мода & Ритейл</button>
+            <button class="filter-btn" onclick="filterSector('Финтех', this)">Финтех & Инвестиции</button>
+        </div>
+
+        <div class="filter-group">
+            <span class="filter-label">Локация:</span>
+            <button class="filter-btn active" onclick="filterDistrict('ALL', this)">Все локации</button>
+            <button class="filter-btn" onclick="filterDistrict('ЦАО', this)">ЦАО (Тверская, Хамовники)</button>
+            <button class="filter-btn" onclick="filterDistrict('Сити', this)">Москва-Сити & Пресня</button>
+            <button class="filter-btn" onclick="filterDistrict('ЗАО', this)">ЗАО (Кутузовский, Раменки)</button>
+            <button class="filter-btn" onclick="filterDistrict('САО', this)">САО (Ленинградский)</button>
+            <button class="filter-btn" onclick="filterDistrict('ЮАО', this)">ЮАО (Варшавское)</button>
+            <button class="filter-btn" onclick="filterDistrict('ТиНАО', this)">Новая Москва (Фуд Сити)</button>
+            <button class="filter-btn" onclick="filterDistrict('ЗелАО', this)">Зеленоград (Микроэлектроника)</button>
+        </div>
+    </div>
+
+    <!-- ТАБЛИЦА -->
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 28%;">Предприятие & Фокус</th>
+                    <th style="width: 16%;">Отрасль & ЛПР</th>
+                    <th style="width: 28%;">Выявленная Боль (Потери)</th>
+                    <th style="width: 14%;">Тарифы (Setup/Retainer)</th>
+                    <th style="width: 14%;">Инструменты</th>
+                </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+                <!-- Генерируется из data.js -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ДОСЬЕ -->
+<div class="modal-overlay" id="dossierModal">
+    <div class="modal-card">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h2 id="mName" style="font-family:'Playfair Display', serif; color:var(--gold); margin-bottom:6px;">Название Компании</h2>
+        <div id="mMeta" style="font-size:0.85rem; color:var(--gold-light); margin-bottom:20px;">Округ • Отрасль</div>
+
+        <div class="dossier-sec">
+            <div class="dossier-label">Контакты & ЛПР:</div>
+            <div class="dossier-text" id="mContacts"></div>
+        </div>
+
+        <div class="dossier-sec">
+            <div class="dossier-label">Точка Утечки Выручки (Боль):</div>
+            <div class="dossier-text" id="mPain" style="border-left: 3px solid var(--red);"></div>
+        </div>
+
+        <div class="dossier-sec">
+            <div class="dossier-label">Оффер «Троянского Коня» (Решение за 48 часов):</div>
+            <div class="dossier-text" id="mTrojan" style="border-left: 3px solid var(--green);"></div>
+        </div>
+
+        <div class="dossier-sec">
+            <div class="dossier-label">Финансовый Эффект & ROI:</div>
+            <div class="dossier-text" id="mRoi"></div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:25px; flex-wrap:wrap;">
+            <a href="#" id="mDeckLink" class="btn-tool btn-deck" style="padding:10px 18px;">📊 Открыть Слайды iPad</a>
+            <a href="#" id="mPagerLink" class="btn-tool btn-pager" style="padding:10px 18px;">📄 Открыть 1-Pager А4</a>
+            <a href="#" id="mDemoLink" class="btn-tool" style="background:#C5A059; color:#000; padding:10px 18px;" target="_blank">⚡ Открыть Живой Демо-Стенд</a>
+        </div>
+    </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+    let currentSector = 'ALL';
+    let currentDistrict = 'ALL';
+    let searchQuery = '';
+
+    const leads = typeof moscowLeads !== 'undefined' ? moscowLeads : [];
+
+    function renderLeads() {
+        const tbody = document.getElementById('leadsTableBody');
+        tbody.innerHTML = '';
+
+        const filtered = leads.filter(item => {
+            const matchSector = currentSector === 'ALL' || item.sector.toLowerCase().includes(currentSector.toLowerCase());
+            const matchDistrict = currentDistrict === 'ALL' || item.region.toLowerCase().includes(currentDistrict.toLowerCase());
+            const q = searchQuery.toLowerCase();
+            const matchSearch = !q || 
+                item.name.toLowerCase().includes(q) ||
+                item.region.toLowerCase().includes(q) ||
+                item.sector.toLowerCase().includes(q) ||
+                item.pain_point.toLowerCase().includes(q) ||
+                item.target_persona.toLowerCase().includes(q) ||
+                item.contact_info.toLowerCase().includes(q);
+
+            return matchSector && matchDistrict && matchSearch;
+        });
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:40px; color:var(--text-dim);">Предприятий не найдено. Попробуйте изменить параметры поиска или фильтров.</td></tr>`;
+            return;
+        }
+
+        filtered.forEach(lead => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>
+                    <div class="lead-name">${lead.name}</div>
+                    <div class="lead-district">📍 ${lead.region}</div>
+                    <div class="lead-focus">${lead.focus}</div>
+                </td>
+                <td>
+                    <span class="sector-tag ${lead.badge_class}">${lead.sector}</span>
+                    <div style="font-size:0.8rem; color:#94A3B8; margin-top:8px;"><strong>ЛПР:</strong> ${lead.target_persona}</div>
+                </td>
+                <td>
+                    <div style="font-size:0.85rem; color:#CBD5E1; line-height:1.5;">${lead.pain_point}</div>
+                </td>
+                <td>
+                    <div class="price-badge">${lead.price_setup}</div>
+                    <div class="retainer-badge">${lead.price_retainer}</div>
+                </td>
+                <td>
+                    <div class="actions-cell">
+                        <a href="Dynamic_Pitch_Deck.html?id=${lead.id}" class="btn-tool btn-deck">📊 Слайды iPad</a>
+                        <a href="Dynamic_One_Pager.html?id=${lead.id}" class="btn-tool btn-pager">📄 1-Pager А4</a>
+                        <button class="btn-tool btn-modal" onclick="openModal('${lead.id}')">🔍 Досье</button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function filterSector(sector, btn) {
+        currentSector = sector;
+        document.querySelectorAll('.filter-group:nth-child(2) .filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderLeads();
+    }
+
+    function filterDistrict(district, btn) {
+        currentDistrict = district;
+        document.querySelectorAll('.filter-group:nth-child(3) .filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderLeads();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderLeads();
+    });
+
+    function openModal(id) {
+        const lead = leads.find(x => x.id === id);
+        if (!lead) return;
+
+        document.getElementById('mName').innerText = lead.name;
+        document.getElementById('mMeta').innerText = `${lead.region} • ${lead.sector}`;
+        document.getElementById('mContacts').innerHTML = `<strong>Адрес & Контакты:</strong> ${lead.contact_info}<br><strong>Ключевое лицо (ЛПР):</strong> ${lead.target_persona}`;
+        document.getElementById('mPain').innerText = lead.pain_point;
+        document.getElementById('mTrojan').innerText = lead.trojan_pitch;
+        document.getElementById('mRoi').innerHTML = `<strong>Обоснование окупаемости:</strong> ${lead.roi_desc}<br><br><strong>Стоимость Setup:</strong> ${lead.price_setup} | <strong>Сопровождение Retainer:</strong> ${lead.price_retainer}`;
+
+        document.getElementById('mDeckLink').href = `Dynamic_Pitch_Deck.html?id=${lead.id}`;
+        document.getElementById('mPagerLink').href = `Dynamic_One_Pager.html?id=${lead.id}`;
+        document.getElementById('mDemoLink').href = lead.template_url;
+
+        document.getElementById('dossierModal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('dossierModal').classList.remove('active');
+    }
+
+    // Инициализация при загрузке
+    renderLeads();
+</script>
+
+</body>
+</html>

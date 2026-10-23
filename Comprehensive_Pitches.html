@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Каталог КП, Конкурентные Тарифы & ROI в Москве | Глобал Плюс</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-base: #0B0E14;
+    --bg-surface: #121721;
+    --bg-card: #18202E;
+    --gold: #C5A059;
+    --gold-light: #E0C07A;
+    --red: #D32F2F;
+    --green: #10B981;
+    --white: #F8FAFC;
+    --text-dim: #94A3B8;
+    --border: rgba(197, 160, 89, 0.2);
+    --border-card: rgba(255, 255, 255, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--white);
+    padding: 40px 20px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-card);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .nav-btns {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-card);
+    color: var(--gold);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .btn-back:hover {
+    background: var(--gold);
+    color: #000;
+  }
+  .btn-comp {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #6EE7B7;
+  }
+  .btn-comp:hover {
+    background: #10B981;
+    color: #000;
+  }
+  .brand-badge {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    color: var(--gold);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-card);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .price-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .price-card.featured {
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.15);
+  }
+  .price-header {
+    margin-bottom: 15px;
+  }
+  .price-tier {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .price-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 4px 0 10px;
+  }
+  .price-val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .price-retainer {
+    color: var(--green);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .price-features {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+  .price-features li {
+    font-size: 0.9rem;
+    color: #CBD5E1;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* СЕКТОРАЛЬНЫЕ ОФФЕРЫ */
+  .sector-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .sector-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sector-badge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+  }
+  .sector-desc {
+    color: #CBD5E1;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+  .sector-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    background: rgba(0,0,0,0.3);
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  .metric-item strong {
+    color: var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+  <div class="nav-btns">
+    <a href="index.html" class="btn-back">&larr; В Центр Продаж</a>
+    <a href="Competitors_Analysis.html" class="btn-back btn-comp">⚔️ Сравнить с Конкурентами</a>
+    <a href="Leads_List.html" class="btn-back">📋 База 100 Компаний</a>
+  </div>
+  <span class="brand-badge">КАТАЛОГ ОФФЕРОВ • МОСКВА 2026</span>
+</div>
+
+<h1>Каталог Коммерческих Предложений, Тарифы & Обоснование ROI</h1>
+<p style="color: var(--text-dim); font-size: 1.05rem; margin-bottom: 35px;">
+  Прайс-листы внедрения (Setup), ежемесячного развития (Retainer) и детальный расчет окупаемости под 10 ключевых отраслей Москвы и Московской агломерации.
+</p>
+
+<!-- БАЗОВАЯ СЕТКА ТАРИФОВ -->
+<h2>1. Стандартные Пакеты Внедрения в Москве</h2>
+
+<div class="pricing-grid">
+
+  <!-- ТАРИФ 1 -->
+  <div class="price-card">
+    <div class="price-header">
+      <div class="price-tier">Пакет 1</div>
+      <div class="price-name">«Экспресс-Старт»</div>
+      <div class="price-val">240 000 – 380 000 ₽</div>
+      <div class="price-retainer">Retainer: 45 000 – 65 000 ₽/мес</div>
+    </div>
+    <ul class="price-features">
+      <li>Срок прототипа: <strong>48 часов</strong></li>
+      <li>Боевой релиз: <strong>до 7 дней</strong></li>
+      <li>Кинематографичный 60fps лендинг (4K видеоряд)</li>
+      <li>Интеграция СБП (0.4% эквайринг)</li>
+      <li>Telegram-бот для уведомлений и сбора лидов</li>
+      <li>Окупаемость: <strong>14–20 дней</strong></li>
+    </ul>
+    <p style="font-size:0.85rem; color:var(--text-dim);">Для бутиков, премиум-детейлинга, авторских ресторанов и арт-галерей.</p>
+  </div>
+
+  <!-- ТАРИФ 2 -->
+  <div class="price-card featured">
+    <div class="price-header">
+      <div class="price-tier">Пакет 2 (Хит Москвы)</div>
+      <div class="price-name">«Бизнес Экспансия»</div>
+      <div class="price-val">480 000 – 690 000 ₽</div>
+      <div class="price-retainer">Retainer: 80 000 – 115 000 ₽/мес</div>
+    </div>
+    <ul class="price-features">
+      <li>Срок прототипа: <strong>48 часов</strong></li>
+      <li>Боевой релиз: <strong>10–14 дней</strong></li>
+      <li>Интерактивные 3D-конфигураторы / шахматки</li>
+      <li>Модуль прямого бронирования без комиссий (0%)</li>
+      <li>Двусторонняя синхронизация с 1С / CRM / iiko</li>
+      <li>Telegram VIP-консьерж с ИИ-квалификацией</li>
+      <li>Окупаемость: <strong>от 7 дней до 1 месяца</strong></li>
+    </ul>
+    <p style="font-size:0.85rem; color:var(--gold-light);">Флагманский выбор для девелоперов, клиник, санаториев и оптовиков.</p>
+  </div>
+
+  <!-- ТАРИФ 3 -->
+  <div class="price-card">
+    <div class="price-header">
+      <div class="price-tier">Пакет 3</div>
+      <div class="price-name">«Enterprise Флагман»</div>
+      <div class="price-val">750 000 – 950 000 ₽</div>
+      <div class="price-retainer">Retainer: 125 000 – 160 000 ₽/мес</div>
+    </div>
+    <ul class="price-features">
+      <li>Срок прототипа: <strong>48 часов</strong></li>
+      <li>Боевой релиз: <strong>14–21 день</strong></li>
+      <li>Высоконагруженный B2B-портал оптовых поставок</li>
+      <li>Личные кабинеты дистрибьюторов и дилеров</li>
+      <li>Интеграция с 'Честным Знаком', Меркурием и ЭДО</li>
+      <li>Выделенный технический SLA 24/7 (до 15 минут)</li>
+      <li>Окупаемость: <strong>за первый крупный оптовый контракт</strong></li>
+    </ul>
+    <p style="font-size:0.85rem; color:var(--text-dim);">Для отелей 5*, агрокластеров, промышленных заводов и логистических хабов.</p>
+  </div>
+
+</div>
+
+<!-- ОТРАСЛЕВЫЕ ОФФЕРЫ -->
+<h2>2. Отраслевые Офферы и Обоснование ROI (10 Секторов Москвы)</h2>
+
+<!-- СЕКТОР 1 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🏨 1. Отели & Гранд-Гостиницы 5* (ЦАО, Тверская, Пресня)</span>
+    <span class="sector-badge">Экономия до 35+ млн ₽/год</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Внедрение независимого скоростного модуля прямого бронирования с нулевой комиссией (0%), мультивалютным эквайрингом (СБП, Mir, UnionPay) и Telegram-консьержем для VIP-гостей.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>580 000 – 750 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>95 000 – 125 000 ₽/мес</strong></div>
+    <div class="metric-item">Чистый профит: <strong>Экономия 18% комиссий OTA</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за первые 7 дней сезона</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 2 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🏥 2. Частная Медицина & Премиальные Клиники (ЕМС, К+31, Олимп)</span>
+    <span class="sector-badge">Рост чекапов на 35%</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Интерактивный 3D-конструктор персонализированных диагностических чекапов и онкоскринингов с онлайн-бронированием времени врачей и СБП-депозитом.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>480 000 – 690 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>80 000 – 115 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Сокращение нагрузки регистратуры на 60%</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 3 комплексных чекапа</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 3 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🏙️ 3. Девелопмент & Элитная Недвижимость (Sminex, Vesper, Capital Group)</span>
+    <span class="sector-badge">Сделки со 150+ млн ₽</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Интерактивный 60fps 3D-селектор пентхаусов с симуляцией видов из окон 360°, расчетом инсоляции и экспресс-бронированием за 10 000 ₽ по СБП.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>620 000 – 890 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>95 000 – 140 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Сокращение цикла сделки на 25%</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 1 проданную резиденцию</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 4 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🍽️ 4. Ресторанные Холдинги & Фудмоллы (Novikov Group, WRF, ДЕПО)</span>
+    <span class="sector-badge">0% комиссий доставки</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Собственный шлюз прямой премиум-доставки с 0% комиссий агрегаторам + гарантирующее бронирование столов с возвратным СБП-депозитом (ликвидация No-Show).
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>480 000 – 780 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>80 000 – 130 000 ₽/мес</strong></div>
+    <div class="metric-item">Экономия: <strong>до 18 млн ₽/год на комиссиях еды</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 14 дней</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 5 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>📦 5. Оптовые Хабы & Продукты Питания (Фуд Сити, Русагро, Мираторг)</span>
+    <span class="sector-badge">Заказы от 1 тонны</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> B2B-терминал оптовых закупок партий: расчет фурных и паллетных норм, автогенерация счетов, ветеринарные справки 'Меркурий' и 'Честный Знак'.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>680 000 – 950 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>110 000 – 160 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Ускорение обработки заказа с 3 дней до 10 мин</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за первый оптовый контракт</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 6 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🔬 6. Высокотехнологичные Заводы & Микроэлектроника (Микрон, ЭЛВИС, ЩЛЗ)</span>
+    <span class="sector-badge">Импортозамещение 2026</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Инженерный онлайн-конфигуратор кремниевых компонентов и промышленного оборудования с выгрузкой BIM/CAD моделей и заказом сэмплов.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>580 000 – 890 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>90 000 – 140 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Рост заявок разработчиков в 2.4 раза</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 1 промышленную партию</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 7 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🚛 7. Логистические Хабы & Терминалы (Деловые Линии, Major, Шереметьево-Карго)</span>
+    <span class="sector-badge">Электронные тайм-слоты</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Терминальная система бронирования окон пандусов и КПП, калькулятор сложных мультимодальных грузоперевозок и GDP-мониторинг холодовой цепи.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>640 000 – 890 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>100 000 – 145 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Ликвидация очередей на терминалах на 100%</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 1 месяц</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 8 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>🏎️ 8. Премиальный Автоуход & Тюнинг (Brooklands, Автодом, Авилон Аура)</span>
+    <span class="sector-badge">Чеки от 500 000 ₽</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> 60fps 3D-конфигуратор оклейки суперкаров полиуретановой бронепленкой, расчет керамических составов 9H и онлайн-бронирование сервисного бокса.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>480 000 – 680 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>75 000 – 110 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Рост конверсии чеков от 400к на 45%</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 2 оклеенных автомобиля</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 9 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>💎 9. Мода, Ритейл & Ювелирные Дома (12 STOREEZ, MIUZ, Cluev, Monochrome)</span>
+    <span class="sector-badge">50 000 RPS без сбоев</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Высоконагруженный движок моментальных дропов с защитой от ботов-перекупщиков, макро-видео фактуры кашемира 60fps и 3D-селектор бриллиантов 4C.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>520 000 – 850 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>85 000 – 135 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Рост среднего чека онлайн-заказа на 40%</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за 1 успешный дроп</strong></div>
+  </div>
+</div>
+
+<!-- СЕКТОР 10 -->
+<div class="sector-card">
+  <div class="sector-title">
+    <span>💼 10. Финтех, Private Banking & Инвестиции (БКС, АТОН, ФИНАМ, CORE.XP)</span>
+    <span class="sector-badge">Активы от 30 млн ₽</span>
+  </div>
+  <p class="sector-desc">
+    <strong>Оффер:</strong> Интерактивный симулятор инвестиционных портфелей, закрытый Family Office терминал с шифрованием заявок и калькуляторы стресс-тестирования доходности.
+  </p>
+  <div class="sector-metrics">
+    <div class="metric-item">Стоимость Setup: <strong>650 000 – 890 000 ₽</strong></div>
+    <div class="metric-item">Retainer: <strong>105 000 – 145 000 ₽/мес</strong></div>
+    <div class="metric-item">Эффект: <strong>Привлечение Private-клиентов с чеками от 50 млн ₽</strong></div>
+    <div class="metric-item">Окупаемость: <strong>за первый привлеченный капитал</strong></div>
+  </div>
+</div>
+
+</body>
+</html>

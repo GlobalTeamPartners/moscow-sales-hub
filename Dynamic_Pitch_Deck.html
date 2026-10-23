@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интерактивная Презентация iPad | Глобал Плюс Москва</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+        background: #0A0C10;
+        color: #fff;
+        margin: 0;
+        overflow: hidden;
+        user-select: none;
+    }
+    .watermark {
+        position: fixed;
+        top: 25px;
+        left: 30px;
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        letter-spacing: 2px;
+        color: rgba(197, 160, 89, 0.6);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .btn-exit {
+        color: rgba(255,255,255,0.6);
+        text-decoration: none;
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 6px 14px;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+    .btn-exit:hover {
+        color: #fff;
+        border-color: #C5A059;
+        background: rgba(197, 160, 89, 0.15);
+    }
+    .lead-picker {
+        background: rgba(18, 23, 33, 0.85);
+        border: 1px solid rgba(197, 160, 89, 0.4);
+        color: #E0C07A;
+        font-size: 12px;
+        padding: 5px 12px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+    }
+    .slide {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px 60px;
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
+        z-index: 10;
+    }
+    .slide.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+    .slide.prev {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+        color: #FFFFFF;
+        margin: 15px 0 20px;
+        line-height: 1.15;
+        max-width: 1050px;
+    }
+    h2 {
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+        color: #C5A059;
+        font-weight: 500;
+        margin-bottom: 25px;
+        max-width: 850px;
+    }
+    .pill-tag {
+        display: inline-block;
+        background: rgba(197, 160, 89, 0.15);
+        border: 1px solid #C5A059;
+        color: #E0C07A;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .body-text {
+        font-size: clamp(1rem, 1.6vw, 1.25rem);
+        color: #94A3B8;
+        max-width: 880px;
+        line-height: 1.7;
+    }
+    .body-text strong {
+        color: #F8FAFC;
+    }
+
+    .card-box {
+        background: rgba(18, 23, 33, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 35px 45px;
+        margin-top: 30px;
+        max-width: 880px;
+        text-align: left;
+    }
+    .card-box.red-border {
+        border-left: 5px solid #EF4444;
+    }
+    .card-box.green-border {
+        border-left: 5px solid #10B981;
+    }
+    .card-box p {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.65;
+        color: #CBD5E1;
+    }
+
+    .pricing-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(197, 160, 89, 0.12) 0%, rgba(18, 23, 33, 0.9) 100%);
+        border: 1px solid #C5A059;
+        border-radius: 16px;
+        padding: 30px 50px;
+        margin-top: 30px;
+    }
+    .pricing-banner .val {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 700;
+        color: #E0C07A;
+    }
+    .pricing-banner .sub {
+        color: #6EE7B7;
+        font-weight: 600;
+        font-size: 1.05rem;
+        margin-top: 6px;
+    }
+
+    .buttons-row {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+    .btn-demo, .btn-template-deck {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 26px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        transition: all 0.2s;
+    }
+    .btn-demo {
+        background: #C5A059;
+        color: #000;
+    }
+    .btn-demo:hover {
+        background: #E0C07A;
+        transform: translateY(-2px);
+    }
+    .btn-template-deck {
+        background: rgba(16, 185, 129, 0.2);
+        border: 1px solid rgba(16, 185, 129, 0.5);
+        color: #6EE7B7;
+    }
+    .btn-template-deck:hover {
+        background: #10B981;
+        color: #000;
+        transform: translateY(-2px);
+    }
+
+    /* ФОНОВЫЕ СЛОИ */
+    .bg-gradient {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at 50% 30%, #151C28 0%, #080A0E 100%);
+        z-index: 1;
+    }
+    .grid-overlay {
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(rgba(197, 160, 89, 0.03) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(197, 160, 89, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    /* НАВИГАЦИОННЫЕ ТОЧКИ */
+    .nav {
+        position: fixed;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 100;
+    }
+    .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .nav-dot.active {
+        background: #C5A059;
+        transform: scale(1.4);
+    }
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<div class="grid-overlay"></div>
+
+<div class="watermark">
+    <span>ГЛОБАЛ ПЛЮС &times; ЦЕНТР ПРОДАЖ МОСКВА</span>
+    <select id="deckLeadPicker" class="lead-picker" onchange="switchLead(this.value)"></select>
+    <a href="Leads_List.html" class="btn-exit">&larr; В базу 100 компаний</a>
+</div>
+
+<!-- СЛАЙД 0: ТИТУЛ -->
+<div class="slide active" id="slide0">
+    <div class="pill-tag" id="d-sector-tag">СТРАТЕГИЧЕСКАЯ ПРОГРАММА ЭКСПАНСИИ 2026</div>
+    <h1 id="d-name">Название Предприятия</h1>
+    <h2 id="d-focus">Специализация предприятия</h2>
+    <p class="body-text">Персональная программа цифровой трансформации сбыта, ликвидации потерь на комиссиях агрегаторов и запуска боевой ИИ-инфраструктуры в Москве за 48 часов.</p>
+    <p style="font-size: 0.9rem; color: #64748B; margin-top: 30px;">(Листайте стрелками на клавиатуре, кликом по экрану или свайпом &darr;)</p>
+</div>
+
+<!-- СЛАЙД 1: ДИАГНОЗ ПОТЕРЬ -->
+<div class="slide" id="slide1">
+    <div class="pill-tag" style="background: rgba(239,68,68,0.15); border-color:#EF4444; color:#FCA5A5;">ЭКСПРЕСС-ДИАГНОСТИКА УТЕЧКИ ВЫРУЧКИ</div>
+    <h1>Точки Скрытых Потерь в Москве</h1>
+    <div class="card-box red-border">
+        <p id="d-pain">Загрузка данных...</p>
+    </div>
+    <p style="margin-top: 25px; color: #94A3B8; font-size: 1rem; max-width: 780px;">
+        Традиционные агентства тратят месяцы на совещания. Мы сразу выявляем узкое горлышко и ликвидируем потерю маржинальности бизнеса.
+    </p>
+</div>
+
+<!-- СЛАЙД 2: РЕШЕНИЕ ЗА 48 ЧАСОВ -->
+<div class="slide" id="slide2">
+    <div class="pill-tag" style="background: rgba(16,185,129,0.15); border-color:#10B981; color:#6EE7B7;">РЕШЕНИЕ «ГЛОБАЛ ПЛЮС» ЗА 48 ЧАСОВ</div>
+    <h1>Боевой Прототип Системы</h1>
+    <div class="card-box green-border">
+        <p id="d-trojan">Загрузка данных...</p>
+    </div>
+    <div class="buttons-row">
+        <a href="#" id="d-demo" class="btn-demo" target="_blank">ОТКРЫТЬ ЖИВОЙ ПРОТОТИП ⚡</a>
+        <a href="#" id="d-template" class="btn-template-deck" target="_blank">РЕКОМЕНДУЕМОЕ РЕШЕНИЕ 🌐</a>
+    </div>
+</div>
+
+<!-- СЛАЙД 3: ЭКОНОМИКА И ROI -->
+<div class="slide" id="slide3">
+    <div class="pill-tag" style="background: rgba(16,185,129,0.15); border-color:#10B981; color:#6EE7B7;">ЭКОНОМИКА И ОКУПАЕМОСТЬ (ROI)</div>
+    <h1>Инвестиции и Гарантированный Эффект</h1>
+    <p class="body-text" id="d-roi" style="margin-top:10px;">Ожидаемый экономический эффект...</p>
+    
+    <div class="pricing-banner">
+        <div class="val" id="d-price">Внедрение: 580 000 ₽</div>
+        <div class="sub" id="d-retainer">Сопровождение и развитие: 95 000 ₽/мес | Запуск под ключ за 48 часов</div>
+    </div>
+    
+    <p style="margin-top: 25px; color: #94A3B8; font-size: 0.95rem; max-width: 800px;">
+        «Глобал Плюс» гарантирует 0% комиссий с вашего оборота. Все деньги заходят напрямую на ваш расчетный счет через СБП без посредников.
+    </p>
+</div>
+
+<!-- ТОЧКИ НАВИГАЦИИ -->
+<div class="nav">
+    <div class="nav-dot active" onclick="goTo(0)"></div>
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+    const leads = typeof moscowLeads !== 'undefined' ? moscowLeads : [];
+    const urlParams = new URLSearchParams(window.location.search);
+    const leadId = urlParams.get('id');
+    let currentLead = leads.find(x => x.id === leadId) || leads[0];
+
+    // Заполнение селектора компаний
+    const picker = document.getElementById('deckLeadPicker');
+    leads.forEach(l => {
+        const opt = document.createElement('option');
+        opt.value = l.id;
+        opt.innerText = `${l.name} (${l.region})`;
+        if (l.id === currentLead.id) opt.selected = true;
+        picker.appendChild(opt);
+    });
+
+    function renderSlideData(lead) {
+        document.getElementById('d-name').innerText = lead.name;
+        document.getElementById('d-focus').innerText = `${lead.region} • ${lead.focus}`;
+        document.getElementById('d-sector-tag').innerText = `СТРАТЕГИЧЕСКОЕ ПРЕДЛОЖЕНИЕ 2026 • ${lead.sector.toUpperCase()}`;
+        document.getElementById('d-pain').innerHTML = `<strong>Выявленные точки потерь:</strong><br>${lead.pain_point}`;
+        document.getElementById('d-trojan').innerHTML = `<strong>Оффер «Троянского коня» (прототип за 48 часов):</strong><br>${lead.trojan_pitch}`;
+        document.getElementById('d-demo').href = lead.template_url;
+        document.getElementById('d-template').href = lead.template_url;
+        document.getElementById('d-template').innerText = lead.template_name;
+        document.getElementById('d-roi').innerHTML = `<strong>Расчет экономического эффекта:</strong> ${lead.roi_desc}`;
+        document.getElementById('d-price').innerText = `Пакет внедрения: ${lead.price_setup}`;
+        document.getElementById('d-retainer').innerText = `Абонентское сопровождение (Retainer): ${lead.price_retainer} | Запуск за 48 часов`;
+    }
+
+    function switchLead(id) {
+        currentLead = leads.find(x => x.id === id) || leads[0];
+        window.history.replaceState(null, '', `?id=${currentLead.id}`);
+        renderSlideData(currentLead);
+    }
+
+    renderSlideData(currentLead);
+
+    // Управление слайдами
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.nav-dot');
+
+    function goTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides.forEach((s, i) => {
+            s.classList.remove('active', 'prev');
+            if (i < index) s.classList.add('prev');
+        });
+        dots.forEach(d => d.classList.remove('active'));
+
+        currentSlide = index;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) goTo(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) goTo(currentSlide - 1);
+    }
+
+    // Клавиатура
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            nextSlide();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+        }
+    });
+
+    // Клики по экрану
+    window.addEventListener('click', (e) => {
+        if (e.target.closest('a') || e.target.closest('select') || e.target.closest('.nav-dot')) return;
+        nextSlide();
+    });
+
+    // Сенсорные свайпы для iPad
+    let touchStartY = 0;
+    window.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY;
+    }, {passive: true});
+
+    window.addEventListener('touchend', e => {
+        const touchEndY = e.changedTouches[0].clientY;
+        const diff = touchStartY - touchEndY;
+        if (diff > 50) nextSlide();
+        else if (diff < -50) prevSlide();
+    }, {passive: true});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог 18 Решений Global Plus для Москвы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0B0E14;
+            --bg-surface: #121721;
+            --bg-card: #18202E;
+            --gold: #C5A059;
+            --gold-light: #E0C07A;
+            --red: #D32F2F;
+            --green: #10B981;
+            --blue: #2563EB;
+            --white: #F8FAFC;
+            --text-dim: #94A3B8;
+            --border: rgba(197, 160, 89, 0.2);
+            --border-card: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            padding: 30px 20px 80px;
+            line-height: 1.6;
+        }
+        .top-nav {
+            max-width: 1240px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-card);
+            color: var(--gold);
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .btn-back:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(197,160,89,0.12) 0%, rgba(18,23,33,0.8) 100%);
+            border: 1px solid var(--gold);
+            border-radius: 16px;
+            padding: 35px 40px;
+            margin-bottom: 35px;
+        }
+        .brand-badge {
+            display: inline-block;
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-light);
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            margin-bottom: 12px;
+        }
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            max-width: 900px;
+        }
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 28px;
+        }
+        .tpl-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tpl-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+        }
+        .tpl-header {
+            padding: 24px 24px 16px;
+        }
+        .tpl-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            background: rgba(197,160,89,0.15);
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+        }
+        .tpl-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .tpl-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .tpl-footer {
+            padding: 18px 24px;
+            border-top: 1px solid var(--border-card);
+            background: rgba(0,0,0,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-open {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            background: var(--gold);
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-open:hover {
+            background: #E0C07A;
+        }
+        .tech-tags {
+            font-size: 0.75rem;
+            color: var(--green);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-nav">
+    <a href="index.html" class="btn-back">&larr; В Центр Продаж Москвы</a>
+    <div style="font-size:0.85rem; color:var(--gold-light);">18 ГОТОВЫХ ИНЖЕНЕРНЫХ ШАБЛОНОВ • МОСКВА 2026</div>
+</div>
+
+<div class="container">
+    <div class="hero-banner">
+        <span class="brand-badge">ПОРТФОЛИО ЖИВЫХ ПРОТОТИПОВ ДЛЯ ПЕРЕГОВОРОВ</span>
+        <h1>Каталог 18 Решений Global Plus в Москве</h1>
+        <p class="subtitle">Открывайте любой из этих стендов на iPad перед генеральным директором или владельцем компании. Никаких картинок и черновиков — только 60fps кинематографичные платформы с рабочими шлюзами, калькуляторами и формами под столичные сегменты бизнеса.</p>
+    </div>
+
+    <div class="templates-grid">
+
+        <!-- 1 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Отели 5* & HoReCa</span>
+                <div class="tpl-title">Ultra-Luxury Hotel & Direct Booking 0%</div>
+                <div class="tpl-desc">Кинематографичный портал пятизвездочного гранд-отеля с 4K видеорядом интерьеров, 3D-туром по представительским люксам и модулем прямого бронирования номеров со СБП без 18% комиссий Островку.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">4K Video • СБП 0.4% • PMS API</span>
+                <a href="https://globalteamgroup.github.io/horeca-grand-sample/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Девелопмент Де-Люкс</span>
+                <div class="tpl-title">3D Penthouse & Skyline Selector</div>
+                <div class="tpl-desc">Платформа продаж клубных домов и небоскребов Москва-Сити: интерактивный выбор этажа, 360-градусный обзор видов на Кремль и Москву-реку, экспресс-бронирование лота за 10 000 ₽.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">60fps 3D • Инсоляция • Ипотека</span>
+                <a href="https://globalteamgroup.github.io/luxury-estate-sample/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Премиум Медицина</span>
+                <div class="tpl-title">Medical Checkup & Surgery Navigator</div>
+                <div class="tpl-desc">Медицинский навигатор для многопрофильных госпиталей: интерактивный подбор чекапов по симптомам, онлайн-разбор МРТ со вторым мнением профессора и запись в операционный блок.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">МИС интеграция • Второе мнение • 152-ФЗ</span>
+                <a href="https://globalteamgroup.github.io/europa-clinic/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Высокая Гастрономия</span>
+                <div class="tpl-title">Haute Cuisine & Table Booking с СБП</div>
+                <div class="tpl-desc">Интерфейс для ресторанов гида Michelin и трендовых гастробаров: бронирование конкретного столика на интерактивной схеме зала с возвратным депозитом (0% No-Show потерь).</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">iiko / r_keeper • СБП-депозит • Telegram</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/horeca-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Агро & Продовольственные Хабы</span>
+                <div class="tpl-title">Food City Agro-Wholesale Mega-Hub</div>
+                <div class="tpl-desc">B2B-маркетплейс оптовых поставок сельхозпродукции от 1 тонны: расчет температурных рефрижераторов, автоматическое формирование ветсправок 'Меркурий' и безналичная безопасная сделка.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Расчет фур • ФГИС 'Меркурий' • 1C:ERP</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/wood-industry-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">FMCG & Сырьевые Поставки</span>
+                <div class="tpl-title">FMCG Commodities & Wagon Norms</div>
+                <div class="tpl-desc">B2B-кабинет для закупки сахара, масла и зерна промышленными пищевыми комбинатами: расчет железнодорожных тарифов, остатков элеваторов и автовыставление счетов с факторингом.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Вагонные нормы • ЭДО Диадок • Факторинг</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/wood-industry-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Микроэлектроника</span>
+                <div class="tpl-title">High-Tech Silicon & RFID Portal</div>
+                <div class="tpl-desc">Инженерный портал завода микроэлектроники (Зеленоград): подбор чипов и интегральных схем по параметрам, закрытый доступ к datasheets и заказ инженерных сэмплов в 1 клик.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Инженерный фильтр • RFID • Сэмплы</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/wood-industry-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Промышленное Производство</span>
+                <div class="tpl-title">Smart Elevator 3D Configurator</div>
+                <div class="tpl-desc">3D-конструктор кабин пассажирских и скоростных лифтов для девелоперов: выбор отделки камнем, зеркал, освещения и прямая выгрузка готовой BIM/Revit модели в проект застройщика.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">3D кабина • Экспорт в BIM • ГОСТ 33984</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/wood-industry-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Фармацевтическая Логистика</span>
+                <div class="tpl-title">Pharma & 3PL Cold Chain Hub</div>
+                <div class="tpl-desc">Логистический портал ответственного хранения и транспортировки лекарств: GDP-паспорт поставки, онлайн-телеметрия температуры 2-8°C в кузове и интеграция со складской WMS.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Стандарты GDP • WMS телеметрия • 3PL</span>
+                <a href="https://globalteamgroup.github.io/tourism-sample/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Фулфилмент & Маркетплейсы</span>
+                <div class="tpl-title">Marketplace Fulfillment & Slots</div>
+                <div class="tpl-desc">Платформа сдачи товаров на склады Wildberries/Ozon: онлайн-бронирование тайм-слотов пандусов, автоматическая сверка штрих-кодовой маркировки и ликвидация очередей.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Тайм-слоты • 'Честный Знак' • QR-пропуска</span>
+                <a href="https://globalteamgroup.github.io/tourism-sample/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Премиум Детейлинг</span>
+                <div class="tpl-title">Supercar PPF 3D Wrap Configurator</div>
+                <div class="tpl-desc">Кинематографичный 60fps конфигуратор бронепленки для спорткаров: переключение глянцевого и сатинового полиуретана, калькулятор керамики 9H и онлайн-бронирование бокса со СБП.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">60fps скролл • Текстуры пленок • СБП</span>
+                <a href="https://globalteamgroup.github.io/elite-detailing/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 12 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Люкс Тюнинг & Автоателье</span>
+                <div class="tpl-title">Ultra-Luxury Bespoke Atelier (Aurus / Rolls-Royce)</div>
+                <div class="tpl-desc">Закрытая цифровая комната персонализации автомобилей для первых лиц: выбор сортов кожи Nappa, инкрустация ценными породами дерева, потолок 'Звездное небо' и вышивка монограмм.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Bespoke ателье • 3D салон • Закрытый клуб</span>
+                <a href="https://globalteamgroup.github.io/elite-detailing/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 13 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Модный Ритейл & High-Load</span>
+                <div class="tpl-title">Limited Drop-Engine 50 000 RPS</div>
+                <div class="tpl-desc">Высоконагруженный движок моментальных дропов для брендов уровня Monochrome и 12 STOREEZ: встроенная защита от ботов-перекупщиков, электронная очередь и оплата по СБП в 1 клик.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">50k RPS • Анти-бот • СБП 1 клик</span>
+                <a href="https://globalteamgroup.github.io/global-plus/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 14 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Ювелирные Дома</span>
+                <div class="tpl-title">Certified Diamond 4C Finder</div>
+                <div class="tpl-desc">Интерактивный селектор бриллиантов высокой каратности: 3D-сравнение огранки, чистоты и цвета по шкале GIA, расчет стоимости оправы помолвочного кольца и бронь примерки в бутике.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">GIA стандарты • 3D игра граней • Бронь</span>
+                <a href="https://globalteamgroup.github.io/global-plus/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 15 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Финтех & Инвестиции</span>
+                <div class="tpl-title">Ultima Private Banking Studio</div>
+                <div class="tpl-desc">Платформа для состоятельных частных инвесторов: моделирование доходности альтернативных активов (золото, замещающие бонды, pre-IPO), стресс-тесты и закрытый чат с портфельным управляющим.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Фин-модели • Шифрование • Private Banking</span>
+                <a href="https://globalteamgroup.github.io/global-plus/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 16 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Коммерческая Недвижимость</span>
+                <div class="tpl-title">Commercial Real Estate Data Hub</div>
+                <div class="tpl-desc">Интерактивный аналитический радар рынков недвижимости: ставки аренды складов и офисов класса А по округам Москвы, расчет окупаемости покупки целых этажей для корпораций.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Гео-аналитика • Расчет IRR • Оценка БЦ</span>
+                <a href="https://globalteamgroup.github.io/global-plus/" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 17 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Фудмоллы & Фудкорты</span>
+                <div class="tpl-title">Foodmall Multi-Cart & QR Ordering</div>
+                <div class="tpl-desc">Платформа мульти-заказа для гастромаркетов (ДЕПО Лесная, Центральный рынок): выбор блюд из 10 разных корнеров в одну корзину, раздельная оплата по QR за столом и экспресс-доставка.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Мульти-корзина • QR оплата • Сплит счетов</span>
+                <a href="https://globalteampartners.github.io/kmv-sales-hub/demos/horeca-demo/index.html" class="btn-open" target="_blank">Смотреть Демо &nearr;</a>
+            </div>
+        </div>
+
+        <!-- 18 -->
+        <div class="tpl-card">
+            <div class="tpl-header">
+                <span class="tpl-pill">Официальный Шоурил</span>
+                <div class="tpl-title">Global Plus | Официальный Презентационный Портал</div>
+                <div class="tpl-desc">Официальный сайт агентства — визитная карточка технологического стека, кейсов и методологии развертывания B2B-систем и нейросетевых агентов за 48 часов.</div>
+            </div>
+            <div class="tpl-footer">
+                <span class="tech-tags">Портал агентства • Шоурил • Global Plus</span>
+                <a href="https://globalteamgroup.github.io/global-plus/" class="btn-open" target="_blank">Смотреть Портал &nearr;</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
